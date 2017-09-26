@@ -59,6 +59,7 @@ import {
     LOGGER_NATIVE
 } from 'app/utils/sentry';
 import {stripTrailingSlashes} from 'app/utils/url';
+import watch from 'app/watch';
 
 import Config from 'assets/config';
 
@@ -81,7 +82,8 @@ export default class Mattermost {
         initializeSentry();
 
         this.store = configureStore(initialState);
-        this.unsubscribeFromStore = this.store.subscribe(this.listenForHydration);
+        this.store.subscribe(this.storeListener);
+        this.isListeningForHydration = true;
         AppState.addEventListener('change', this.handleAppStateChange);
         EventEmitter.on(General.CONFIG_CHANGED, this.handleConfigChanged);
         EventEmitter.on(NavigationTypes.NAVIGATION_RESET, this.handleReset);
@@ -403,19 +405,24 @@ export default class Mattermost {
         }
     };
 
-    // We need to wait for hydration to occur before load the router.
-    listenForHydration = () => {
+    storeListener = () => {
         const state = this.store.getState();
-        if (!this.isConfigured) {
-            this.configurePushNotifications();
-        }
 
-        Orientation.getOrientation((orientation) => {
-            this.orientationDidChange(orientation);
-        });
+        // We need to wait for hydration to occur before load the router.
+        if (this.isListeningForHydration) {
+            Orientation.getOrientation((orientation) => {
+                this.orientationDidChange(orientation);
+            });
 
-        if (state.views.root.hydrationComplete) {
-            this.unsubscribeFromStore();
+            if (!state.views.root.hydrationComplete) {
+                return;
+            }
+
+            if (!this.isConfigured) {
+                this.configurePushNotifications();
+            }
+
+            this.isListeningForHydration = false;
 
             const isNotActive = AppState.currentState !== 'active';
             const notification = PushNotifications.getNotification();
@@ -449,6 +456,8 @@ export default class Mattermost {
                 this.launchApp();
             }
         }
+
+        watch.setCredentials(state.entities.general.credentials.url || "", state.entities.general.credentials.token || "");
     };
 
     onRegisterDevice = (data) => {
