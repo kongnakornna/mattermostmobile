@@ -457,7 +457,7 @@ export default class Mattermost {
             }
         }
 
-        watch.setCredentials(state.entities.general.credentials.url || "", state.entities.general.credentials.token || "");
+        watch.setCredentials(state.entities.general.credentials.url || '', state.entities.general.credentials.token || '');
     };
 
     onRegisterDevice = (data) => {
