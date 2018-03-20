@@ -25,6 +25,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  
+  [self registerDefaultsFromSettingsBundle];
+  
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
@@ -82,6 +85,31 @@
 -(void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(nonnull NSString *)identifier completionHandler:(nonnull void (^)(void))completionHandler {
   [SessionManager sharedSession].savedCompletionHandler = completionHandler;
   [[SessionManager sharedSession] createSessionForRequestRequest:identifier];
+}
+
+#pragma NSUserDefaults
+- (void)registerDefaultsFromSettingsBundle {
+  // this function writes default settings as settings
+  NSString *settingsBundle = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"bundle"];
+  if(!settingsBundle) {
+    NSLog(@"Could not find Settings.bundle");
+    return;
+  }
+  
+  NSDictionary *settings = [NSDictionary dictionaryWithContentsOfFile:[settingsBundle stringByAppendingPathComponent:@"Root.plist"]];
+  NSArray *preferences = [settings objectForKey:@"PreferenceSpecifiers"];
+  
+  NSMutableDictionary *defaultsToRegister = [[NSMutableDictionary alloc] initWithCapacity:[preferences count]];
+  for(NSDictionary *prefSpecification in preferences) {
+    NSString *key = [prefSpecification objectForKey:@"Key"];
+    if(key) {
+      [defaultsToRegister setObject:[prefSpecification objectForKey:@"DefaultValue"] forKey:key];
+      NSLog(@"writing as default %@ to the key %@",[prefSpecification objectForKey:@"DefaultValue"],key);
+    }
+  }
+  
+  [[NSUserDefaults standardUserDefaults] registerDefaults:defaultsToRegister];
+  
 }
 
 @end

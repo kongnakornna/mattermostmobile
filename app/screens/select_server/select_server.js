@@ -33,6 +33,9 @@ import checkUpgradeType from 'app/utils/client_upgrade';
 
 import logo from 'assets/images/logo.png';
 
+import {NativeModules} from 'react-native';
+var PurebredManager = NativeModules.PurebredManager;
+
 class SelectServer extends PureComponent {
     static propTypes = {
         actions: PropTypes.shape({
@@ -182,6 +185,10 @@ class SelectServer extends PureComponent {
     handleTextChanged = (url) => {
         this.setState({url});
     };
+
+    onPurebredClick = preventDoubleTap(async () => {
+        PurebredManager.launch('select');
+    });
 
     onClick = preventDoubleTap(async () => {
         const preUrl = urlParse(this.state.url, true);
@@ -363,6 +370,18 @@ class SelectServer extends PureComponent {
                             {buttonIcon}
                             <Text style={GlobalStyles.signupButtonText}>
                                 {buttonText}
+                            </Text>
+                        </Button>
+                        <Button
+                            onPress={this.onPurebredClick}
+                            containerStyle={[GlobalStyles.signupButton, style.connectButton]}
+                        >
+                            {buttonIcon}
+                            <Text style={GlobalStyles.signupButtonText}>
+                                <FormattedText
+                                    id='mobile.components.select_purebred_cert'
+                                    defaultMessage='Purebred'
+                                />
                             </Text>
                         </Button>
                         <ErrorText error={error}/>

@@ -111,6 +111,29 @@
 		F006936FC2884C24A1321FC0 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 356C9186FA374641A00EB2EA /* MaterialIcons.ttf */; };
 		F083DB472349411A8E6E7AAD /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE17F630DB5D41FD93F32D22 /* OpenSans-LightItalic.ttf */; };
 		F23C99AA5FA10E457A76803A /* libPods-MattermostTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4246DC09024BB33A3E491E25 /* libPods-MattermostTests.a */; };
+		F241D805206084D40024883B /* KeyChainDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = F241D804206084D40024883B /* KeyChainDataSource.mm */; };
+		F241D808206084EA0024883B /* KeyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F241D807206084E90024883B /* KeyDetailViewController.m */; };
+		F241D80B206085070024883B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F241D809206085070024883B /* ViewController.m */; };
+		F241D83920608AEF0024883B /* FileInZipInfo.h in Sources */ = {isa = PBXBuildFile; fileRef = F241D82F2060883A0024883B /* FileInZipInfo.h */; };
+		F241D83A20608AEF0024883B /* FileInZipInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F241D8302060883A0024883B /* FileInZipInfo.m */; };
+		F241D83B20608AEF0024883B /* ZipException.h in Sources */ = {isa = PBXBuildFile; fileRef = F241D8312060883A0024883B /* ZipException.h */; };
+		F241D83C20608AEF0024883B /* ZipException.m in Sources */ = {isa = PBXBuildFile; fileRef = F241D8322060883A0024883B /* ZipException.m */; };
+		F241D83D20608AEF0024883B /* ZipFile.h in Sources */ = {isa = PBXBuildFile; fileRef = F241D8332060883A0024883B /* ZipFile.h */; };
+		F241D83E20608AEF0024883B /* ZipFile.m in Sources */ = {isa = PBXBuildFile; fileRef = F241D8342060883A0024883B /* ZipFile.m */; };
+		F241D83F20608AEF0024883B /* ZipReadStream.h in Sources */ = {isa = PBXBuildFile; fileRef = F241D8352060883A0024883B /* ZipReadStream.h */; };
+		F241D84020608AEF0024883B /* ZipReadStream.m in Sources */ = {isa = PBXBuildFile; fileRef = F241D8362060883A0024883B /* ZipReadStream.m */; };
+		F241D84120608AEF0024883B /* ZipWriteStream.h in Sources */ = {isa = PBXBuildFile; fileRef = F241D8372060883A0024883B /* ZipWriteStream.h */; };
+		F241D84220608AEF0024883B /* ZipWriteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = F241D8382060883A0024883B /* ZipWriteStream.m */; };
+		F241D84320608AF70024883B /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = F241D8122060882A0024883B /* ioapi.c */; };
+		F241D84420608AF70024883B /* ioapi.h in Sources */ = {isa = PBXBuildFile; fileRef = F241D8132060882A0024883B /* ioapi.h */; };
+		F241D84520608AF70024883B /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = F241D8142060882A0024883B /* mztools.c */; };
+		F241D84620608AF70024883B /* mztools.h in Sources */ = {isa = PBXBuildFile; fileRef = F241D8152060882A0024883B /* mztools.h */; };
+		F241D84720608AF70024883B /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = F241D8162060882A0024883B /* unzip.c */; };
+		F241D84820608AF70024883B /* unzip.h in Sources */ = {isa = PBXBuildFile; fileRef = F241D8172060882A0024883B /* unzip.h */; };
+		F241D84920608AF70024883B /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = F241D8182060882A0024883B /* zip.c */; };
+		F241D84A20608AF70024883B /* zip.h in Sources */ = {isa = PBXBuildFile; fileRef = F241D8192060882A0024883B /* zip.h */; };
+		F241D84C206094870024883B /* Purebred.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F241D84B206094870024883B /* Purebred.storyboard */; };
+		F241D84F2060968C0024883B /* PurebredManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F241D84E2060968C0024883B /* PurebredManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -752,6 +775,33 @@
 		EE3EE4548D3F4A49B1274722 /* libRNLocalAuth.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNLocalAuth.a; sourceTree = "<group>"; };
 		EE671DF7637347CD8C069819 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
 		F1F071EE85494E269A50AE88 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		F241D7BF206084D30024883B /* KeyChainDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyChainDataSource.h; sourceTree = "<group>"; };
+		F241D804206084D40024883B /* KeyChainDataSource.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = KeyChainDataSource.mm; sourceTree = "<group>"; };
+		F241D806206084E90024883B /* KeyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyDetailViewController.h; sourceTree = "<group>"; };
+		F241D807206084E90024883B /* KeyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyDetailViewController.m; sourceTree = "<group>"; };
+		F241D809206085070024883B /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		F241D80A206085070024883B /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		F241D8122060882A0024883B /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		F241D8132060882A0024883B /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		F241D8142060882A0024883B /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
+		F241D8152060882A0024883B /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
+		F241D8162060882A0024883B /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		F241D8172060882A0024883B /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		F241D8182060882A0024883B /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		F241D8192060882A0024883B /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		F241D82F2060883A0024883B /* FileInZipInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileInZipInfo.h; sourceTree = "<group>"; };
+		F241D8302060883A0024883B /* FileInZipInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileInZipInfo.m; sourceTree = "<group>"; };
+		F241D8312060883A0024883B /* ZipException.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZipException.h; sourceTree = "<group>"; };
+		F241D8322060883A0024883B /* ZipException.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZipException.m; sourceTree = "<group>"; };
+		F241D8332060883A0024883B /* ZipFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZipFile.h; sourceTree = "<group>"; };
+		F241D8342060883A0024883B /* ZipFile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZipFile.m; sourceTree = "<group>"; };
+		F241D8352060883A0024883B /* ZipReadStream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZipReadStream.h; sourceTree = "<group>"; };
+		F241D8362060883A0024883B /* ZipReadStream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZipReadStream.m; sourceTree = "<group>"; };
+		F241D8372060883A0024883B /* ZipWriteStream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZipWriteStream.h; sourceTree = "<group>"; };
+		F241D8382060883A0024883B /* ZipWriteStream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZipWriteStream.m; sourceTree = "<group>"; };
+		F241D84B206094870024883B /* Purebred.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Purebred.storyboard; sourceTree = "<group>"; };
+		F241D84D206096720024883B /* PurebredManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PurebredManager.h; sourceTree = "<group>"; };
+		F241D84E2060968C0024883B /* PurebredManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PurebredManager.m; sourceTree = "<group>"; };
 		FBBEC29EE2D3418D9AC33BD5 /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-ExtraBoldItalic.ttf"; path = "../assets/fonts/OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -950,6 +1000,15 @@
 		13B07FAE1A68108700A75B9A /* Mattermost */ = {
 			isa = PBXGroup;
 			children = (
+				F241D82E2060883A0024883B /* Objective-Zip */,
+				F241D8112060882A0024883B /* MiniZip */,
+				F241D7BF206084D30024883B /* KeyChainDataSource.h */,
+				F241D804206084D40024883B /* KeyChainDataSource.mm */,
+				F241D806206084E90024883B /* KeyDetailViewController.h */,
+				F241D807206084E90024883B /* KeyDetailViewController.m */,
+				F241D80A206085070024883B /* ViewController.h */,
+				F241D809206085070024883B /* ViewController.m */,
+				F241D84B206094870024883B /* Purebred.storyboard */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				7FEB10961F6101710039A015 /* BlurAppScreen.h */,
@@ -966,6 +1025,8 @@
 				7F292AA51E8ABB1100A450A3 /* splash.png */,
 				7FEB109B1F61019C0039A015 /* UIImage+ImageEffects.h */,
 				7FEB109C1F61019C0039A015 /* UIImage+ImageEffects.m */,
+				F241D84D206096720024883B /* PurebredManager.h */,
+				F241D84E2060968C0024883B /* PurebredManager.m */,
 			);
 			name = Mattermost;
 			sourceTree = "<group>";
@@ -1375,6 +1436,39 @@
 				7FFE329A1FD9CB640038C7A0 /* MattermostShare.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F241D8112060882A0024883B /* MiniZip */ = {
+			isa = PBXGroup;
+			children = (
+				F241D8122060882A0024883B /* ioapi.c */,
+				F241D8132060882A0024883B /* ioapi.h */,
+				F241D8142060882A0024883B /* mztools.c */,
+				F241D8152060882A0024883B /* mztools.h */,
+				F241D8162060882A0024883B /* unzip.c */,
+				F241D8172060882A0024883B /* unzip.h */,
+				F241D8182060882A0024883B /* zip.c */,
+				F241D8192060882A0024883B /* zip.h */,
+			);
+			name = MiniZip;
+			path = ../../../Purebred/KeyShareConsumer/KeyShareConsumer/MiniZip;
+			sourceTree = "<group>";
+		};
+		F241D82E2060883A0024883B /* Objective-Zip */ = {
+			isa = PBXGroup;
+			children = (
+				F241D82F2060883A0024883B /* FileInZipInfo.h */,
+				F241D8302060883A0024883B /* FileInZipInfo.m */,
+				F241D8312060883A0024883B /* ZipException.h */,
+				F241D8322060883A0024883B /* ZipException.m */,
+				F241D8332060883A0024883B /* ZipFile.h */,
+				F241D8342060883A0024883B /* ZipFile.m */,
+				F241D8352060883A0024883B /* ZipReadStream.h */,
+				F241D8362060883A0024883B /* ZipReadStream.m */,
+				F241D8372060883A0024883B /* ZipWriteStream.h */,
+				F241D8382060883A0024883B /* ZipWriteStream.m */,
+			);
+			path = "Objective-Zip";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2153,6 +2247,7 @@
 				382D94CF15EE4FC292C3F341 /* Foundation.ttf in Resources */,
 				C337E8708D2845C6A8DBB47E /* Ionicons.ttf in Resources */,
 				C035DB50ED2045F09923FFAE /* MaterialCommunityIcons.ttf in Resources */,
+				F241D84C206094870024883B /* Purebred.storyboard in Resources */,
 				F006936FC2884C24A1321FC0 /* MaterialIcons.ttf in Resources */,
 				7F292AA71E8ABB1100A450A3 /* splash.png in Resources */,
 				420A7328E12C4B72AEF420CE /* Octicons.ttf in Resources */,
@@ -2342,10 +2437,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F241D84320608AF70024883B /* ioapi.c in Sources */,
+				F241D84420608AF70024883B /* ioapi.h in Sources */,
+				F241D84520608AF70024883B /* mztools.c in Sources */,
+				F241D84620608AF70024883B /* mztools.h in Sources */,
+				F241D84720608AF70024883B /* unzip.c in Sources */,
+				F241D84820608AF70024883B /* unzip.h in Sources */,
+				F241D84920608AF70024883B /* zip.c in Sources */,
+				F241D84A20608AF70024883B /* zip.h in Sources */,
+				F241D83920608AEF0024883B /* FileInZipInfo.h in Sources */,
+				F241D83A20608AEF0024883B /* FileInZipInfo.m in Sources */,
+				F241D83B20608AEF0024883B /* ZipException.h in Sources */,
+				F241D83C20608AEF0024883B /* ZipException.m in Sources */,
+				F241D83D20608AEF0024883B /* ZipFile.h in Sources */,
+				F241D83E20608AEF0024883B /* ZipFile.m in Sources */,
+				F241D83F20608AEF0024883B /* ZipReadStream.h in Sources */,
+				F241D84020608AEF0024883B /* ZipReadStream.m in Sources */,
+				F241D84120608AEF0024883B /* ZipWriteStream.h in Sources */,
+				F241D84220608AEF0024883B /* ZipWriteStream.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				7FEB109E1F61019C0039A015 /* UIImage+ImageEffects.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				7FF7BE6D1FDEE5E8005E55FE /* MattermostBucket.m in Sources */,
+				F241D80B206085070024883B /* ViewController.m in Sources */,
+				F241D805206084D40024883B /* KeyChainDataSource.mm in Sources */,
+				F241D808206084EA0024883B /* KeyDetailViewController.m in Sources */,
+				F241D84F2060968C0024883B /* PurebredManager.m in Sources */,
 				7FEB10981F6101710039A015 /* BlurAppScreen.m in Sources */,
 				7F50C96A203C6E80007CA374 /* SessionManager.m in Sources */,
 				7FEB109D1F61019C0039A015 /* MattermostManaged.m in Sources */,
