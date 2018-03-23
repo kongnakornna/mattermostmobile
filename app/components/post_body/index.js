@@ -38,6 +38,8 @@ function mapStateToProps(state, ownProps) {
         isSystemMessage: isSystemMessage(post),
         message: post.message,
         theme: getTheme(state),
+        type: post.type,
+        pluginPosts: state.plugins.postTypes,
     };
 }
 

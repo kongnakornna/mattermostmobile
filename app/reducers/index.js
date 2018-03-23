@@ -5,10 +5,12 @@ import app from './app';
 import device from './device';
 import navigation from './navigation';
 import views from './views';
+import plugins from './plugins';
 
 export default {
     app,
     device,
     navigation,
     views,
+    plugins,
 };

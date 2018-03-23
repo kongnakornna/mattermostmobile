@@ -45,6 +45,8 @@ export default class PostBody extends PureComponent {
         isSystemMessage: PropTypes.bool,
         managedConfig: PropTypes.object,
         message: PropTypes.string,
+        type: PropTypes.string,
+        pluginPosts: PropTypes.object,
         navigator: PropTypes.object.isRequired,
         onAddReaction: PropTypes.func,
         onCopyPermalink: PropTypes.func,
@@ -164,6 +166,8 @@ export default class PostBody extends PureComponent {
             renderReplyBar,
             theme,
             toggleSelected,
+            type,
+            pluginPosts,
         } = this.props;
         const actions = [];
         const style = getStyleSheet(theme);
@@ -285,6 +289,12 @@ export default class PostBody extends PureComponent {
                     }
                 </OptionsContext>
             );
+        }
+
+        const pluginPost = pluginPosts[type];
+        if (pluginPost) {
+            const PluginComponent = pluginPost.component;
+            body = <PluginComponent/>;
         }
 
         return (

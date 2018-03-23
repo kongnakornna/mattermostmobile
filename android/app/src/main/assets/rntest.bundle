@@ -1,0 +1,79 @@
+__d(function (global, _require, module, exports, _dependencyMap) {
+    var _App = _require(_dependencyMap[0], "./App.js");
+
+    var _App2 = babelHelpers.interopRequireDefault(_App);
+
+    var PluginClass = function () {
+        function PluginClass() {
+            babelHelpers.classCallCheck(this, PluginClass);
+        }
+
+        babelHelpers.createClass(PluginClass, [{
+            key: "initialize",
+            value: function initialize(registerComponents, store) {
+                console.log('initialized rntest');
+                registerComponents('rntest', {}, {
+                    'custom_rntest': _App2.default
+                });
+            }
+        }]);
+        return PluginClass;
+    }();
+
+    if (!global.plugins) {
+        global.plugins = {};
+    }
+
+    global.plugins['rntest'] = new PluginClass();
+
+    if (global.initializePlugins) {
+        global.initializePlugins();
+    }
+},%replace1%,[%replace2%],"index.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  var _jsxFileName = "/usr/local/joram/RNTest/App.js";
+  var React = global['react'];
+  var _global$reactNative = global['react-native'],
+      Text = _global$reactNative.Text,
+      View = _global$reactNative.View;
+
+  var PostTypeRNTest = function (_React$Component) {
+    babelHelpers.inherits(PostTypeRNTest, _React$Component);
+
+    function PostTypeRNTest() {
+      babelHelpers.classCallCheck(this, PostTypeRNTest);
+      return babelHelpers.possibleConstructorReturn(this, (PostTypeRNTest.__proto__ || Object.getPrototypeOf(PostTypeRNTest)).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(PostTypeRNTest, [{
+      key: "render",
+      value: function render() {
+        return React.createElement(
+          View,
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 11
+            }
+          },
+          React.createElement(
+            Text,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 12
+              }
+            },
+            "Overridden by rntest plugin!"
+          )
+        );
+      }
+    }]);
+    return PostTypeRNTest;
+  }(React.Component);
+
+  exports.default = PostTypeRNTest;
+},%replace2%,[],"App.js");

@@ -65,6 +65,8 @@ const ViewTypes = keyMirror({
     ANNOUNCEMENT_BANNER: null,
 
     INCREMENT_EMOJI_PICKER_PAGE: null,
+
+    RECEIVED_PLUGIN_POST_TYPES: null,
 });
 
 export default {

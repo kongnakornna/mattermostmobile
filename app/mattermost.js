@@ -58,6 +58,7 @@ import {captureException, initializeSentry, LOGGER_JAVASCRIPT, LOGGER_NATIVE} fr
 import tracker from 'app/utils/time_tracker';
 import {stripTrailingSlashes} from 'app/utils/url';
 import {EmojiIndicesByAlias} from 'app/utils/emojis';
+import {setPluginStore} from 'app/plugins';
 
 import LocalConfig from 'assets/config';
 
@@ -94,6 +95,7 @@ export default class Mattermost {
         setJSExceptionHandler(this.errorHandler, false);
         setNativeExceptionHandler(this.nativeErrorHandler, false);
         setSystemEmojis(EmojiIndicesByAlias);
+        setPluginStore(this.store);
     }
 
     errorHandler = (e, isFatal) => {

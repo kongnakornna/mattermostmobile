@@ -1,6 +1,7 @@
 package com.mattermost.rnbeta;
 
 import com.mattermost.share.SharePackage;
+import com.mattermost.bundler.MattermostBundler;
 import android.app.Application;
 import android.support.annotation.NonNull;
 import android.content.Context;
@@ -72,7 +73,8 @@ public class MainApplication extends NavigationApplication implements INotificat
             new ReactNativeYouTube(),
             new ReactVideoPackage(),
             new RNReactNativeDocViewerPackage(),
-            new SharePackage()
+            new SharePackage(),
+            new MattermostBundler(getApplicationContext())
     );
   }
 
@@ -80,6 +82,12 @@ public class MainApplication extends NavigationApplication implements INotificat
   public String getJSMainModuleName() {
     return "index";
   }
+
+  @Override
+  public String getJSBundleFile() {
+    return MattermostBundler.getJSBundleFile();
+  }
+
 
   @Override
   public void onCreate() {
