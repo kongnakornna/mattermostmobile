@@ -86,7 +86,6 @@
 		7FF7BE721FE01FC7005E55FE /* libRCTOrientation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 374634671E848085005E1244 /* libRCTOrientation.a */; };
 		7FFDB3191FE3566C009E3BCF /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 005346E5C0E542BFABAE1411 /* FontAwesome.ttf */; };
 		7FFE329E1FD9CB650038C7A0 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FFE329D1FD9CB650038C7A0 /* ShareViewController.m */; };
-		7FFE32A11FD9CB650038C7A0 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FFE329F1FD9CB650038C7A0 /* MainInterface.storyboard */; };
 		7FFE32A51FD9CB650038C7A0 /* MattermostShare.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7FFE329A1FD9CB640038C7A0 /* MattermostShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7FFE32E71FD9CCD00038C7A0 /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37ABD39C1F4CE13B001FDE6B /* libART.a */; };
 		7FFE32E81FD9CCDE0038C7A0 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3752184F1F4B9E980035444B /* libRCTCameraRoll.a */; };
@@ -717,7 +716,6 @@
 		7FFE329A1FD9CB640038C7A0 /* MattermostShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MattermostShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FFE329C1FD9CB650038C7A0 /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		7FFE329D1FD9CB650038C7A0 /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
-		7FFE32A01FD9CB650038C7A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		7FFE32A21FD9CB650038C7A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7FFE32B51FD9CCAA0038C7A0 /* FLAnimatedImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FLAnimatedImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FFE32B61FD9CCAA0038C7A0 /* KSCrash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSCrash.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1286,7 +1284,6 @@
 				7F380D0A1FDB28160061AAD2 /* MattermostShare.entitlements */,
 				7FFE329C1FD9CB650038C7A0 /* ShareViewController.h */,
 				7FFE329D1FD9CB650038C7A0 /* ShareViewController.m */,
-				7FFE329F1FD9CB650038C7A0 /* MainInterface.storyboard */,
 				7FFE32A21FD9CB650038C7A0 /* Info.plist */,
 				7F6C47A31FE87E8C00F5A912 /* PerformRequests.h */,
 				7F6C47A41FE87E8C00F5A912 /* PerformRequests.m */,
@@ -2182,7 +2179,6 @@
 				7FC649EE1FE983660074E4C7 /* EvilIcons.ttf in Resources */,
 				7FF7BE701FDF3EE7005E55FE /* Ionicons.ttf in Resources */,
 				7FFDB3191FE3566C009E3BCF /* FontAwesome.ttf in Resources */,
-				7FFE32A11FD9CB650038C7A0 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2378,17 +2374,6 @@
 			targetProxy = 7FFE32A31FD9CB650038C7A0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		7FFE329F1FD9CB650038C7A0 /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7FFE32A01FD9CB650038C7A0 /* Base */,
-			);
-			name = MainInterface.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
