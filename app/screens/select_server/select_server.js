@@ -33,6 +33,8 @@ import checkUpgradeType from 'app/utils/client_upgrade';
 
 import logo from 'assets/images/logo.png';
 
+import telemetry from 'app/telemetry';
+
 class SelectServer extends PureComponent {
     static propTypes = {
         actions: PropTypes.shape({
@@ -82,6 +84,8 @@ class SelectServer extends PureComponent {
         }
 
         this.props.navigator.setOnNavigatorEvent(this.handleNavigatorEvent);
+        telemetry.captureEnd('selectServerScreen');
+        telemetry.sendMetrics();
     }
 
     componentWillUpdate(nextProps, nextState) {

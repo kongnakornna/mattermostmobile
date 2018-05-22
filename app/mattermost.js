@@ -58,6 +58,7 @@ import {captureException, initializeSentry, LOGGER_JAVASCRIPT, LOGGER_NATIVE} fr
 import tracker from 'app/utils/time_tracker';
 import {stripTrailingSlashes} from 'app/utils/url';
 import {EmojiIndicesByAlias} from 'app/utils/emojis';
+import telemetry from './telemetry';
 
 import LocalConfig from 'assets/config';
 
@@ -66,6 +67,8 @@ const AUTHENTICATION_TIMEOUT = 5 * 60 * 1000;
 
 export default class Mattermost {
     constructor() {
+        telemetry.captureStart('selectServerScreen');
+        telemetry.captureStart('channelScreen');
         this.isConfigured = false;
         this.allowOtherServers = true;
         this.startAppFromPushNotification = false;
@@ -655,6 +658,7 @@ export default class Mattermost {
 
             this.appStarted = true;
             this.startAppFromPushNotification = false;
+            telemetry.captureSinceLaunch('splashScreen');
         }
     };
 }

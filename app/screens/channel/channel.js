@@ -32,6 +32,8 @@ import LocalConfig from 'assets/config';
 import ChannelNavBar from './channel_nav_bar';
 import ChannelPostList from './channel_post_list';
 
+import telemetry from 'app/telemetry';
+
 class Channel extends PureComponent {
     static propTypes = {
         actions: PropTypes.shape({
@@ -74,6 +76,9 @@ class Channel extends PureComponent {
         if (tracker.initialLoad) {
             this.props.actions.recordLoadTime('Start time', 'initialLoad');
         }
+
+        telemetry.captureEnd('channelScreen');
+        telemetry.sendMetrics();
     }
 
     componentWillReceiveProps(nextProps) {
