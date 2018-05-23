@@ -23,7 +23,7 @@ import {ViewTypes} from 'app/constants';
 import PushNotifications from 'app/push_notifications';
 import {stripTrailingSlashes} from 'app/utils/url';
 
-import ChannelLoader from 'app/components/channel_loader';
+// import ChannelLoader from 'app/components/channel_loader';
 import EmptyToolbar from 'app/components/start/empty_toolbar';
 import Loading from 'app/components/loading';
 import SafeAreaView from 'app/components/safe_area_view';
@@ -44,6 +44,8 @@ const lazyLoadPushNotifications = () => {
 const lazyLoadReplyPushNotifications = () => {
     return require('app/utils/push_notifications').onPushNotificationReply;
 };
+
+import telemetry from 'app/telemetry';
 
 /**
  * Entry Component:
@@ -68,11 +70,12 @@ export default class Entry extends PureComponent {
 
     constructor(props) {
         super(props);
-
+        telemetry.captureStart('entryComponent');
         this.state = {
             launchLogin: false,
             launchChannel: false,
         };
+        telemetry.captureEnd('entryConstructor');
     }
 
     componentDidMount() {
@@ -81,6 +84,7 @@ export default class Entry extends PureComponent {
 
         EventEmitter.on(ViewTypes.LAUNCH_LOGIN, this.handleLaunchLogin);
         EventEmitter.on(ViewTypes.LAUNCH_CHANNEL, this.handleLaunchChannel);
+        telemetry.captureEnd('entryComponent');
     }
 
     componentWillUnmount() {
@@ -236,10 +240,10 @@ export default class Entry extends PureComponent {
             isLandscape,
         } = this.props;
 
-        if (this.state.launchLogin) {
-            return this.renderLogin();
-        }
-
+        // if (this.state.launchLogin) {
+        //     return this.renderLogin();
+        // }
+        //
         if (this.state.launchChannel) {
             return this.renderChannel();
         }
@@ -263,11 +267,11 @@ export default class Entry extends PureComponent {
                 </View>
             );
 
-            loading = (
-                <View>
-                    <ChannelLoader channelIsLoading={true}/>
-                </View>
-            );
+            // loading = (
+            //     <View>
+            //         <ChannelLoader channelIsLoading={true}/>
+            //     </View>
+            // );
         } else {
             loading = <Loading/>;
         }

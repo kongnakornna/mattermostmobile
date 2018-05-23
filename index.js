@@ -22,9 +22,8 @@ const metricsSubscription = DeviceEventEmitter.addListener(jsBundleMetrics, (met
 // Uncomment the snippet below if you want to update the modules
 // defined in packager/modulePaths.js so they are included in the main bundle.
 
-/*
-/!* eslint-disable no-console *!/
-/!* eslint-disable no-undef *!/
+/* eslint-disable no-console */
+/* eslint-disable no-undef */
 if (__DEV__) {
     const modules = require.getModules();
     const moduleIds = Object.keys(modules);
@@ -47,4 +46,3 @@ if (__DEV__) {
     // grab this text blob, and put it in a file named packager/moduleNames.js
     console.log(`module.exports = ${JSON.stringify(loadedModuleNames.sort())};`);
 }
-*/

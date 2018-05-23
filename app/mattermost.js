@@ -428,6 +428,7 @@ AppState.addEventListener('change', handleAppStateChange);
 const launchEntry = () => {
     telemetry.captureStart('selectServerScreen');
     telemetry.captureStart('channelScreen');
+    telemetry.captureStart('entryConstructor');
     Navigation.startSingleScreenApp({
         screen: {
             screen: 'Entry',
