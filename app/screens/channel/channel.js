@@ -84,6 +84,8 @@ export default class Channel extends PureComponent {
             this.props.actions.recordLoadTime('Start time', 'initialLoad');
         }
 
+        EventEmitter.emit('renderDrawer');
+
         telemetry.captureEnd('channelScreen');
         telemetry.sendMetrics();
     }
@@ -104,9 +106,14 @@ export default class Channel extends PureComponent {
         }
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
         if (tracker.teamSwitch) {
             this.props.actions.recordLoadTime('Switch Team', 'teamSwitch');
+        }
+
+        // When the team changes emit the event to render the drawer content
+        if (this.props.currentChannelId && !prevProps.currentChannelId) {
+            EventEmitter.emit('renderDrawer');
         }
     }
 
