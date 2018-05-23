@@ -1,9 +1,9 @@
-// Copyright (c) 2016-present Mattermost, Inc. All Rights Reserved.
+// Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See License.txt for license information.
 
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {injectIntl, intlShape} from 'react-intl';
+import {intlShape} from 'react-intl';
 import {
     AppState,
     Platform,
@@ -12,14 +12,10 @@ import {
 
 import EventEmitter from 'mattermost-redux/utils/event_emitter';
 
-import ClientUpgradeListener from 'app/components/client_upgrade_listener';
 import ChannelDrawer from 'app/components/channel_drawer';
 import SettingsDrawer from 'app/components/settings_drawer';
-import ChannelLoader from 'app/components/channel_loader';
 import KeyboardLayout from 'app/components/layout/keyboard_layout';
-import Loading from 'app/components/loading';
 import OfflineIndicator from 'app/components/offline_indicator';
-import PostListRetry from 'app/components/post_list_retry';
 import SafeAreaView from 'app/components/safe_area_view';
 import StatusBar from 'app/components/status_bar';
 import {preventDoubleTap} from 'app/utils/tap';
@@ -34,7 +30,9 @@ import ChannelPostList from './channel_post_list';
 
 import telemetry from 'app/telemetry';
 
-class Channel extends PureComponent {
+let ClientUpgradeListener;
+
+export default class Channel extends PureComponent {
     static propTypes = {
         actions: PropTypes.shape({
             connection: PropTypes.func.isRequired,
@@ -51,10 +49,21 @@ class Channel extends PureComponent {
         currentChannelId: PropTypes.string,
         channelsRequestFailed: PropTypes.bool,
         currentTeamId: PropTypes.string,
-        intl: intlShape.isRequired,
         navigator: PropTypes.object,
         theme: PropTypes.object.isRequired,
     };
+
+    static contextTypes = {
+        intl: intlShape.isRequired,
+    };
+
+    constructor(props) {
+        super(props);
+
+        if (LocalConfig.EnableMobileClientUpgrade && !ClientUpgradeListener) {
+            ClientUpgradeListener = require('app/components/client_upgrade_listener').default;
+        }
+    }
 
     componentWillMount() {
         EventEmitter.on('leave_team', this.handleLeaveTeam);
@@ -69,9 +78,7 @@ class Channel extends PureComponent {
     }
 
     componentDidMount() {
-        if (Platform.OS === 'android') {
-            AppState.addEventListener('change', this.handleAppStateChange);
-        }
+        AppState.addEventListener('change', this.handleAppStateChange);
 
         if (tracker.initialLoad) {
             this.props.actions.recordLoadTime('Start time', 'initialLoad');
@@ -91,6 +98,10 @@ class Channel extends PureComponent {
         if (nextProps.currentTeamId && this.props.currentTeamId !== nextProps.currentTeamId) {
             this.loadChannels(nextProps.currentTeamId);
         }
+
+        if (LocalConfig.EnableMobileClientUpgrade && !ClientUpgradeListener) {
+            ClientUpgradeListener = require('app/components/client_upgrade_listener').default;
+        }
     }
 
     componentDidUpdate() {
@@ -105,20 +116,20 @@ class Channel extends PureComponent {
         EventEmitter.off('leave_team', this.handleLeaveTeam);
         this.networkListener.removeEventListener();
 
-        if (Platform.OS === 'android') {
-            AppState.removeEventListener('change', this.handleAppStateChange);
-        }
+        AppState.removeEventListener('change', this.handleAppStateChange);
 
         closeWebSocket();
         stopPeriodicStatusUpdates();
     }
 
-    attachPostTextbox = (ref) => {
+    attachPostTextBox = (ref) => {
         this.postTextbox = ref;
     };
 
     blurPostTextBox = () => {
-        this.postTextbox.getWrappedInstance().blur();
+        if (this.postTextbox && this.postTextbox.getWrappedInstance()) {
+            this.postTextbox.getWrappedInstance().blur();
+        }
     };
 
     channelDrawerRef = (ref) => {
@@ -134,7 +145,8 @@ class Channel extends PureComponent {
     };
 
     goToChannelInfo = preventDoubleTap(() => {
-        const {intl, navigator, theme} = this.props;
+        const {intl} = this.context;
+        const {navigator, theme} = this.props;
         const options = {
             screen: 'ChannelInfo',
             title: intl.formatMessage({id: 'mobile.routes.channelInfo', defaultMessage: 'Info'}),
@@ -155,7 +167,7 @@ class Channel extends PureComponent {
         }
     });
 
-    handleAppStateChange = async (appState) => {
+    handleWebSocket = (open) => {
         const {actions} = this.props;
         const {
             closeWebSocket,
@@ -163,9 +175,8 @@ class Channel extends PureComponent {
             startPeriodicStatusUpdates,
             stopPeriodicStatusUpdates,
         } = actions;
-        const isActive = appState === 'active';
 
-        if (isActive) {
+        if (open) {
             initWebSocket(Platform.OS);
             startPeriodicStatusUpdates();
         } else {
@@ -174,23 +185,14 @@ class Channel extends PureComponent {
         }
     };
 
-    handleConnectionChange = (isConnected) => {
-        const {actions} = this.props;
-        const {
-            closeWebSocket,
-            connection,
-            initWebSocket,
-            startPeriodicStatusUpdates,
-            stopPeriodicStatusUpdates,
-        } = actions;
+    handleAppStateChange = async (appState) => {
+        this.handleWebSocket(appState === 'active');
+    };
 
-        if (isConnected) {
-            initWebSocket(Platform.OS);
-            startPeriodicStatusUpdates();
-        } else {
-            closeWebSocket(true);
-            stopPeriodicStatusUpdates();
-        }
+    handleConnectionChange = (isConnected) => {
+        const {connection} = this.props.actions;
+
+        this.handleWebSocket(isConnected);
         connection(isConnected);
     };
 
@@ -230,10 +232,10 @@ class Channel extends PureComponent {
     };
 
     render() {
+        const {intl} = this.context;
         const {
             channelsRequestFailed,
             currentChannelId,
-            intl,
             navigator,
             theme,
         } = this.props;
@@ -242,6 +244,7 @@ class Channel extends PureComponent {
 
         if (!currentChannelId) {
             if (channelsRequestFailed) {
+                const PostListRetry = require('app/components/post_list_retry').default;
                 return (
                     <PostListRetry
                         retry={this.retryLoadChannels}
@@ -249,9 +252,11 @@ class Channel extends PureComponent {
                     />
                 );
             }
+
+            const Loading = require('app/components/channel_loader').default;
             return (
                 <View style={style.loading}>
-                    <Loading/>
+                    <Loading channelIsLoading={true}/>
                 </View>
             );
         }
@@ -282,10 +287,9 @@ class Channel extends PureComponent {
                                 <ChannelPostList navigator={navigator}/>
                             </View>
                             <PostTextbox
-                                ref={this.attachPostTextbox}
+                                ref={this.attachPostTextBox}
                                 navigator={navigator}
                             />
-                            <ChannelLoader theme={theme}/>
                         </KeyboardLayout>
                         {LocalConfig.EnableMobileClientUpgrade && <ClientUpgradeListener navigator={navigator}/>}
                     </SafeAreaView>
@@ -306,5 +310,3 @@ const getStyleFromTheme = makeStyleSheetFromTheme((theme) => {
         },
     };
 });
-
-export default injectIntl(Channel);

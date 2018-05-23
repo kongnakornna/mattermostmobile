@@ -1,12 +1,10 @@
 package com.mattermost.rnbeta;
 
 import android.app.Application;
+import android.support.annotation.NonNull;
+import android.content.Context;
+import android.os.Bundle;
 
-//import com.facebook.react.ReactApplication;
-
-//import com.facebook.react.ReactNativeHost;
-
-//import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.reactnativenavigation.NavigationApplication;
 
@@ -19,13 +17,11 @@ import com.wix.reactnativenotifications.core.AppLaunchHelper;
 import com.wix.reactnativenotifications.core.JsIOHelper;
 
 // import third-party modules
-import com.github.yamill.orientation.OrientationPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.gnet.bottomsheet.RNBottomSheetPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.psykar.cookiemanager.CookieManagerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
-import com.facebook.react.ReactPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.horcrux.svg.SvgPackage;
 import io.tradle.react.LocalAuthPackage;
@@ -37,18 +33,18 @@ import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
 import com.brentvatne.react.ReactVideoPackage;
 import com.reactlibrary.RNReactNativeDocViewerPackage;
 import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
+import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
+import com.oblador.keychain.KeychainPackage;
 
 // Mattermost share module
 import com.mattermost.share.SharePackage;
-
-import android.content.Context;
-import android.os.Bundle;
 
 import java.util.Arrays;
 import java.util.List;
 
 
 // telemtry stuff
+import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactMarker;
@@ -59,6 +55,8 @@ import android.support.annotation.Nullable;
 
 public class MainApplication extends NavigationApplication implements INotificationsApplication {
   public NotificationsLifecycleFacade notificationsLifecycleFacade;
+  public Boolean sharedExtensionIsOpened = false;
+  public Boolean replyFromPushNotification = false;
 
   @Override
   public boolean isDebug() {
@@ -76,7 +74,6 @@ public class MainApplication extends NavigationApplication implements INotificat
             new VectorIconsPackage(),
             new SvgPackage(),
             new LinearGradientPackage(),
-            new OrientationPackage(),
             new RNNotificationsPackage(this),
             new LocalAuthPackage(),
             new JailMonkeyPackage(),
@@ -88,7 +85,9 @@ public class MainApplication extends NavigationApplication implements INotificat
             new ReactVideoPackage(),
             new RNReactNativeDocViewerPackage(),
             new ReactNativeDocumentPicker(),
-            new SharePackage(),
+            new SharePackage(this),
+            new KeychainPackage(),
+            new InitializationPackage(this),
             new StartTimePackage(this)
     );
   }
