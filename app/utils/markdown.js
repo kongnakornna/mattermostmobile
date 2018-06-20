@@ -4,6 +4,10 @@
 import {Platform, StyleSheet} from 'react-native';
 import {changeOpacity, makeStyleSheetFromTheme} from 'app/utils/theme';
 
+// pattern to detect the existence of a Chinese, Japanese, or Korean character in a string
+// http://stackoverflow.com/questions/15033196/using-javascript-to-check-whether-a-string-contains-japanese-characters-includi
+const cjkPattern = /[\u3000-\u303f\u3040-\u309f\u30a0-\u30ff\uff00-\uff9f\u4e00-\u9faf\u3400-\u4dbf\uac00-\ud7a3]/;
+
 export function getCodeFont() {
     return Platform.OS === 'ios' ? 'Menlo' : 'monospace';
 }
@@ -177,4 +181,25 @@ export function getDisplayNameForLanguage(language) {
 
 export function escapeRegex(text) {
     return text.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+}
+
+export function convertSearchTermToRegex(term) {
+    let pattern;
+
+    if (cjkPattern.test(term)) {
+        // term contains Chinese, Japanese, or Korean characters so don't mark word boundaries
+        pattern = '(' + escapeRegex(term.replace(/\*/g, '')) + ')';
+    } else if (/[^\s][*]$/.test(term)) {
+        pattern = '\\b(' + escapeRegex(term.substring(0, term.length - 1)) + ')';
+    } else if (term.startsWith('@') || term.startsWith('#')) {
+        // needs special handling of the first boundary because a word boundary doesn't exist before a symbol
+        pattern = '\\B(' + escapeRegex(term) + ')\\b';
+    } else {
+        pattern = '\\b(' + escapeRegex(term) + ')\\b';
+    }
+
+    return {
+        pattern: new RegExp(pattern, 'gi'),
+        term,
+    };
 }

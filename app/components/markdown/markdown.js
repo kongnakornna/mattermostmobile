@@ -29,6 +29,7 @@ import MarkdownTable from './markdown_table';
 import MarkdownTableImage from './markdown_table_image';
 import MarkdownTableRow from './markdown_table_row';
 import MarkdownTableCell from './markdown_table_cell';
+import MarkdownText from './markdown_text';
 import {addListItemIndices, pullOutImages} from './transform';
 
 export default class Markdown extends PureComponent {
@@ -42,6 +43,7 @@ export default class Markdown extends PureComponent {
         onLongPress: PropTypes.func,
         onPermalinkPress: PropTypes.func,
         onPostPress: PropTypes.func,
+        searchMatches: PropTypes.arrayOf(PropTypes.string),
         textStyles: PropTypes.object,
         theme: PropTypes.object.isRequired,
         value: PropTypes.string.isRequired,
@@ -49,6 +51,7 @@ export default class Markdown extends PureComponent {
 
     static defaultProps = {
         textStyles: {},
+        isSearchResult: false,
         blockStyles: {},
         onLongPress: () => true,
     };
@@ -136,10 +139,19 @@ export default class Markdown extends PureComponent {
             // If this text is displayed, it will be styled by the image component
             return <Text>{literal}</Text>;
         }
-        const style = this.computeTextStyle(this.props.baseTextStyle, context);
 
         // Construct the text style based off of the parents of this node since RN's inheritance is limited
-        return <Text style={style}>{literal}</Text>;
+        const style = this.computeTextStyle(this.props.baseTextStyle, context);
+
+        return (
+            <MarkdownText
+                isSearchResult={this.props.isSearchResult}
+                searchMatches={this.props.searchMatches}
+                style={style}
+            >
+                {literal}
+            </MarkdownText>
+        );
     }
 
     renderCodeSpan = ({context, literal}) => {
