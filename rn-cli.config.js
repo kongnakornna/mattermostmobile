@@ -2,16 +2,15 @@
 // See LICENSE.txt for license information.
 
 const path = require('path');
-const blacklist = require('metro/src/blacklist');
+const blacklist = require('metro-config/src/defaults/blacklist');
+const alternateRoots = [
+    path.resolve(__dirname, '.'),
+];
 
 const config = {
-    getBlacklistRE() {
-        return blacklist([/react-native\/local-cli\/core\/__fixtures__.*/]);
-    },
-    getProjectRoots() {
-        return [
-            path.resolve(__dirname, '.'),
-        ];
+    watchFolders: alternateRoots,
+    resolver: {
+        blacklistRE: blacklist,
     },
 };
 

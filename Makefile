@@ -63,8 +63,6 @@ clean: ## Cleans dependencies, previous builds and temp files
 	@echo Cleanup finished
 
 post-install:
-	@./node_modules/.bin/remotedev-debugger --hostname localhost --port 5678 --injectserver
-	@# Must remove the .babelrc for 0.42.0 to work correctly
 	@# Need to copy custom ImagePickerModule.java that implements correct permission checks for android
 	@rm node_modules/react-native-image-picker/android/src/main/java/com/imagepicker/ImagePickerModule.java
 	@cp ./native_modules/ImagePickerModule.java node_modules/react-native-image-picker/android/src/main/java/com/imagepicker
@@ -84,7 +82,7 @@ post-install:
 		sed $ -i'' -e "s|const ReactNative = require('ReactNative');|const ReactNative = require('ReactNative');`echo $\\\\\\r;`const Platform = require('Platform');|g" node_modules/react-native/Libraries/Lists/VirtualizedList.js; \
 	fi
 	@sed -i'' -e 's|transform: \[{scaleY: -1}\],|...Platform.select({android: {transform: \[{perspective: 1}, {scaleY: -1}\]}, ios: {transform: \[{scaleY: -1}\]}}),|g' node_modules/react-native/Libraries/Lists/VirtualizedList.js
-	@cd ./node_modules/mattermost-redux && npm run build
+	@cd ./node_modules/mattermost-redux && npm i && npm run build && rm -rf node_modules
 
 start: | pre-run ## Starts the React Native packager server
 	@if [ $(shell ps -ef | grep -i "cli.js start" | grep -civ grep) -eq 0 ]; then \

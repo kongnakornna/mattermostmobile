@@ -1,13 +1,14 @@
 {
-  "presets": [ "react-native" ],
+  "presets": [ "module:metro-react-native-babel-preset" ],
   "env": {
     "production": {
       "plugins": ["transform-remove-console"]
     }
   },
   "plugins": [
+    "@babel/plugin-proposal-object-rest-spread",
     ["module-resolver", {
-      "root": ["./src", "."],
+      "root": ["."],
       "alias": {
         "assets": "./dist/assets"
       }
